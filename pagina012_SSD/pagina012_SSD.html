@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Gestió d'arxius/Dispositius d'emmagatzemament: SSD</h2>
+
+	<h3>Memòries EEPROM Flash</h3>
+	<p>
+		Dins de les memòries semiconductores distingim entre les volàtils i les no volàtils. Les volàtils corresponen a les RAM i les no volàtils a les ROM. Actualment, s’utilitza també el terme NVM (Non-Volatile Memories) per a referir-se a les memòries ROM amb la capacitat d’escriptura i distingir-les així de la ROM original la qual venia gravada de fàbrica i no es podia modificar el seu contingut.
+	</p>
+	<p>
+		La història de les NVM va començar en 1970 amb l’aparició de les EPROM, la van seguir les EEPROM i posteriorment les EEPROM Flash les quals van començar a utilitzar-se massivament en mòbils, llapis USB, càmeres, SSD, etc., a partir dels 90.
+	</p>
+	<p>
+		Les portes lògiques amb què estan fabricades les EEPROM Flash poden ser NAND o NOR, i és per això que de vegades se les coneix com a memòries NAND o NOR flash.
+	</p>
+	<p>
+		Les NOR flash es caracteritzen per ser més ràpides en la lectura que les NAND, però són més lentes en el procés d’escriptura i d’esborrat; també són més fiables que les NAND que tendeixen a fallar més.
+	</p>
+	<p>
+		Com les NAND són més fàcils i barates de fabricar, i tenen majors densitats d’integració (major capacitats) s’utilitzen en aparells que necessiten emmagatzemar grans quantitats de dades com les memòries SSD, llapis USB, i mòbils. Per altra banda, les NOR flash es releguen al firmware de sistemes embeguts i plaques base (BIOS, targetes gràfiques).
+	</p>
+
+	<h3>Unitats SSD</h3>
+
+	<p>
+		Les SSD (State Solid Device) oferixen velocitats de transferència molt superiors als discos mecànics (HDD) gràcies a l'absència de parts mòbils. Com passa amb la RAM, les memòries flash són d’accés aleatori i permeten un accés a les dades independent d’on estiguen gravades. Això no passa amb els HDD on la velocitat d’accés varia segons la pista on esta gravada la informació així com de la posició del capçal en cada moment.
+	</p>
+	<p>
+		A banda de la velocitat, els avantatges respecte als HDD són el de ser menys sorollosos, més menuts i consumir menys. Per contra, són més cars i amb capacitats d’emmagatzematge inferiors.
+	</p>
+	<p>
+		Mentres que en les RAM cada cel·la de memòria emmagatzema un bit, en les SSD cada cel·la, segons la tecnologia amb què està fabricada (SCL, MLC, TLC, QLC), pot emmagatzemar 1, 2, 3 o 4 bits.
+	</p>
+
+	<figure>
+		<img src="imatges/Celles SSD.png" />
+	</figure>
+
+	<p>
+		A major nombre de bits per cel·la capacitat augmenta però a costa d’una disminució en la velocitat d’accés. Com els costos de fabricació són molt importants, actualment s’utilitzen molt les tecnologies TLC i QLC.
+	</p>
+	<p>
+		A banda de l’anterior, i buscant sempre augmentar les densitats, les cel·les de memòries Flash s’apilen verticalment en diverses capes de cel·les. És la tecnologia 3D-NAND
+		Actualment les memòries 3D-TLC són les més habituals i els models més ràpids utilitzen 3D-MLC.
+	</p>
+
+	<figure>
+		<img src="imatges/Celles 3D.png" />
+	</figure>
+
+	<h3>Funcionament intern</h3>
+
+	<p>
+		En la RAM les cel·les s’agrupen per a formar paraules, que en els ordinadors són de 64bits. En les SSD, les cel·les s’agrupen en pàgines i les pàgines s’agrupen per a formar blocs. Generalment les pàgines tenen entre 2Kb i 16 Kb, mentres que hi ha entre 128 i 256 pàgines per bloc.
+	</p>
+
+	<figure>
+		<img src="imatges/bloc_pagina_ssd.svg" />
+	</figure>
+
+
+	<p>
+		Una vegada coneguda la part interna passem a descriure el procés de lectura, escriptura i esborrat.
+	</p>
+	<p>
+		La unitat mínima d’escriptura és la pàgina però la unitat mínima d’esborrat és el bloc. Nosaltres podem escriure en pàgines individuals però una vegada escrites no les podem ni esborrar ni modificar. Això implica que si volem modificar un pàgina (encara que siga un byte) no podrem fer-lo sobre la mateixa pàgina sinó que hem de fer una còpia d’ella amb la modificació en un altra pàgina i marcar l’original com a invàlida perquè siga esborrada.
+	</p>
+	<p>
+		En resum, dins d’un bloc podem tindre pàgines amb tres estats diferents: les pàgines lliures preparades per a ser emplenades, les pàgines vàlides amb dades, i les pàgines no vàlides marcades per a ser esborrades.
+	</p>
+	<p>
+		Per aclarir el funcionament d’un SSD imaginem un amb 6 blocs i 4 pàgines per bloc.
+	</p>
+
+	<figure>
+		<img src="imatges/Funcionament SSD 1.png" />
+	</figure>
+
+	<p>
+		Inicialment totes les pàgines estan marcades com a lliures el que significa que podem ocupar qualsevol d’elles. Imaginem que graven un arxiu que ocupa sis pàgines i se situen com en la següent figura.
+	</p>
+
+	<figure>
+		<img src="imatges/Funcionament SSD 2.png" />
+	</figure>
+
+	<p>
+		Suposem que fem una modificació que afecta a la primera pàgina del primer bloc. Com hem dit, no es pot modificar una pàgina, el que es fa copiar-la amb la modificació en un altra pàgina lliure i marcar l’original com a no vàlida indicant que no podem tornar gastar-la.
+	</p>
+
+	<figure>
+		<img src="imatges/Funcionament SSD 3.png" />
+	</figure>
+
+	<p>
+		Suposem que esborrem molta informació de l’arxiu que es veu reduït en 4 pàgines. Com hem dit, les pàgines no es poden esborrar. El que es fa es marcar-les com a no vàlides.
+	</p>
+
+	<figure>
+		<img src="imatges/Funcionament SSD 4.png" />
+	</figure>
+
+	<p>
+		Ara el primer bloc té totes les pàgines marcades com a no vàlides per a la qual cosa podem esborrar tot el bloc i deixar les pàgines com a lliures.
+	</p>
+
+	<figure>
+		<img src="imatges/Funcionament SSD 5.png" />
+	</figure>
+
+	<p>
+		A banda dels xips de memòria flash, els SSD tenen una xip, la controladora, que es l’encarregada de tot els processos d’escriptura, lectura i esborrat que hem vist. A banda s’encarrega de la comunicació amb el sistema operatiu.
+	</p>
+
+	<figure>
+		<img src="imatges/controladora SSD.png" />
+	</figure>
+
+
+</body>
+
+</html>

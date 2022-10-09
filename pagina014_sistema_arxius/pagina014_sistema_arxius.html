@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Gestió d'arxius/Sistemes d'arxius</h2>
+
+	<p>
+		El sistema d'arxius és la part del sistema operatiu encarregada de l'organització i l'accés a les dades emmagatzemades en dispositius de memòria secundària com els discos durs, unitats SSD, DVD, USB, targetes de memòria, etc. Podem entendre un sistema d’arxius com el treball que faria un bibliotecari mantenint les estanteries en ordre i portant un registre de cada llibre guardat per tal de localitzar-lo i ubicar-lo ràpidament.
+	</p>
+	<p>
+		El sistema d’arxius proporciona un mecanisme d’abstracció que oculta els detalls relacionats amb l’emmagatzemament dels arxius en els perifèrics. D’esta manera el mateix arxiu es pot gravar de manera transparent en perifèrics amb diferents tecnologies com l’òptica d’un DVD, la magnètica d’un disc dur o en les memòries flash d’un SSD o un USB.
+	</p>
+
+	<h3>Jerarquia de directoris</h3>
+
+	<p>
+		En un sistema d’arxius hi ha dos tipus d’objectes: els arxius i els directoris.
+	</p>
+	<p>
+		Els arxius s’encarreguen de contindre les dades mentres que els directoris (anomenats també carpetes en entorns gràfics) permeten agrupar i organitzar els arxius. Cada directori pot contindre molts arxius i altres directoris creant-se un sistema de directoris jeràrquic en forma d’arbre.
+	</p>
+	<p>
+		Tota jerarquia de directoris té un arxiu especial anomenat arrel (root en anglés) que és el directori inicial a partir del qual penja tota l’estructura de directoris.
+	</p>
+
+	<h4>Ruta d’accés absoluta i relativa</h4>
+	<p>
+		En un sistema d’arxius amb estructura d’arbre cada arxiu ocupa una posició en un dels directoris, esta posició s’anomena ruta (o path). Tenim dos tipus de rutes, les absolutes i les relatives.
+	</p>
+	<p>
+		La ruta absoluta d'un arxiu és la seqüència de directoris per què hem d'anar passant fins arribar al directori on està ubicat començant des de la carpeta arrel. Els directoris se separen per un caràcter separador que, depenent del sistema operatiu, és la / o la \.
+	</p>
+
+
+	<figure>
+		<img src="imatges/Estructura directoris.svg" />
+	</figure>
+
+	<p>
+		En la figura anterior la ruta absoluta per al arxius A1 i A5 és:
+	</p>
+	<ul>
+		<li>\D1\A1</li>
+		<li>\D3\D6\D7\A5</li>
+	</ul>
+
+	<p>
+		La ruta relativa d’un arxiu ve lligat al concepte de directori de treball, també conegut com a directori actiu. Quan s’instal·la un programa la seua estructura de directoris s’afegix a l’estructura de directoris existent a partir del directori en què s’instal·la.
+	</p>
+	<p>
+		Quan una aplicació s’executa pot localitzar els seus arxius fàcilment ja que coneix quin són els seus directoris. En este cas, la localització dels arxius no es fa des de l’arrel sinó a partir del punt d’instal·lació. El directori de treball és el directori que el procés pren com a punt de partida per a localitzar els arxius i sol ser algun dels directoris d’instal·lació del programa. Les rutes relatives són útils perquè són independents d’on s’ha instal·lat l’aplicació ja que no necessiten saber els directoris que no pertanyen a l’aplicació.
+	</p>
+	<p>
+		Mentres les rutes absolutes comencen sempre amb la \ de l’arrel, les relatives comencen pel directori actiu i pugen o baixen per l’estructura de directoris fins arribar a l’arxiu que necessitem.
+		En una estructura de directoris, cada directori sempre té un únic directori pare (a excepció de l’arrel) al qual podem fer referència amb el símbol ..
+	</p>
+
+
+	<p>
+		Per exemple i seguint amb la figura anterior. Suposem un aplicació que s’ha instal·lat en el directori D3 que penja de l’arrel i que l’arxiu A3 és un procés que vol accedir a l’arxiu A7. La ruta relativa d’este arxiu des del directori actiu D3 seria:
+	</p>
+	<ul>
+		<li>D3\D6\D8\A7</li>
+	</ul>
+
+	<p>
+		Suposem ara que és l’arxiu A4 és el procés i que vol accedir a l’arxiu A7. La ruta relativa d’este arxiu des del directori actiu D7 seria:
+	</p>
+	<ul>
+		<li>D7\..\D8\A7</li>
+	</ul>
+
+	<h3>Funcions del sistemes d'axius</h3>
+	<p>
+		Els sistemes d’arxius oferixen estes funcions:
+	</p>
+
+	<ul>
+		<li>
+			Organització i localització<br>
+			Els arxius i directoris s’organitzen jeràrquicament i queden definits per una ubicació.
+		</li>
+		<br>
+		<li>
+			Gestió de l’espai disponible<br>
+			El sistema d’arxius porta un control sobre l’espai disponible i l’espai ocupat. No es guarda igual la informació en un disc, en un DVD, que en un SSD. Es tracta no tan sols d’ocupar un espai sinó de fer-ho d’una manera eficient que facilite l’accés als arxius i evite desaprofitar l’espai disponible.
+		</li>
+		<br>
+		<li>
+			Detecció i bloqueig d’errors físics<br>
+			Per exemple, en un disc detectar zones invàlides que no es poden utilitzar i evitar escriure sobre elles.
+		</li>
+		<br>
+		<li>
+			Suport de xifrat d’arxius
+		</li>
+		<br>
+		<li>
+			Quotes<br>
+			Limitar als usuaris o als grups d’usuaris l’espai que poden utilitzar.
+		</li>
+		<br>
+		<li>
+			Compressió<br>
+			Compressió dels arxius de manera transparent als usuaris.
+		</li>
+		<br>
+		<li>
+			Permisos<br>
+			Mecanismes de permisos d’arxius i directoris a nivell d’usuari o grups d’usuaris.
+			Els usuaris només han de tindre accés als seus arxius i directoris i s’ha d’evitar que pugen vore o modificar o navegar lliurement per l’estructura d’arxius.
+		</li>
+		<br>
+		<li>
+			Fiabilitat<br>
+			La informació del sistema d’arxius en l'emmagatzemament secundari s’ha de mantindre consistent, independentment de les accions que els programes fan en el sistema d’arxius. Ha d’haver tolerància a errors, així un procés pot finalitzar de manera anormal i no haver avisat al sistema d’arxius que acabat amb els arxius que estava utilitzant. En qualsevol moment pot caure el sistema per algun error del programari imprevist, o per algun error físic que penge el sistema o perquè simplement hi haja un tall del subministrament elèctric. Alguns sistemes d’arxius tenen duplicades les estructures més importants
+		</li>
+		<br>
+		<li>
+			Control de concurrència<br>
+			S’ha de controlar i assegurar l’accés correcte als arxius de molts processos al mateix temps.
+		</li>
+		<br>
+		<li>
+			Journaling<br>
+			Moltes de les operacions que es fan sobre el sistema d’arxius requerixen diversos passos. Si durant una operació es produïx algun tipus d’error esta pot quedar a mitges fent que el sistema d’arxius es quede en un estat d’inconsistència. Per a evitar esta situació està el journaling, o registre per diari. Consistix en fer un seguiment dels passos que s’estan fent anotant-los en el journaling abans de fer-los, En cas d’error, podem deixar el sistema d’arxius en un estat consistent ràpidament mirant quines operacions s’han quedat sense completar.
+		</li>
+	</ul>
+
+	<h3>Sistemes d’arxius més habituals</h3>
+	<ul>
+
+	</ul>
+
+
+
+
+
+	<h3>Sistemes d'arxius més habituals</h3>
+	<p>
+		Hi ha molts sistemes d’arxius i la compatibilitat entre ells no és massa bona
+	</p>
+
+	<ul>
+		<li>
+			FAT32<br>
+			Pese a ser molt antic (1996) encara s’utilitza molt ja que és suportat pels sistemes operatius més estesos (Windows, MacOs i GNU/Linux). La majoria d’unitats USB solen estar formatades en FAT32 o exFAT. La seua limitació més important és que no permet guardar arxius de més de 4GB.
+		</li>
+		<li>
+			exFAT<br>
+			És una actualització de FAT32 que elimina la limitació dels 4GB.
+		</li>
+		<li>
+			NTFS<br>
+			És el successor de FAT32 i el sistema d’arxius del sistemes operatius Windows. Els Mac poden llegir els arxius formatats amb NTFS però no escriure en ells.
+		</li>
+		<li>
+			APFS+<br>
+			És el sistema d’arxius d’Apple. El sistemes GNU/Linux poden treballar amb ell, Windows en canvi pot llegir el contingut dels dispositius formatats amb ell però no escriure ells.
+		</li>
+		<li>
+			Ext4<br>
+			És l'utilitzat per les distribucions GNU/Linux. Només poden ser utilitzats pels Linux i és incompatible amb Windows i MacOS.
+		</li>
+	</ul>
+
+
+
+
+
+
+
+</body>
+
+</html>

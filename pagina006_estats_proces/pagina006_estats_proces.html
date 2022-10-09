@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Estats d'un procés</h2>
+
+	<p>
+		Que un procés estiga en marxa no implica que estiga necessàriament en execució, dit d’altra manera no implica que participe en el procés de concurrència.
+	</p>
+
+	<p>
+		Els processos passen per diversos estats durant la seua execució. La següent figura és el diagrama d’estats pels quals pot passar un procés. El nom dels estats està emmarcats amb un cercle, les transicions entre els estats amb un arc juntament amb l’acció o esdeveniment que provoca el canvi d’estat.
+	</p>
+
+	<figure>
+		<img src="imatges/Estats_proces.png" />
+	</figure>
+
+
+	<p>
+		A continuació s’explica cadascun d’estos estats i transicions.
+	</p>
+
+	<ul>
+		<li>
+			Estat de <strong>nou</strong>: en este estat el sistema operatiu encara no ha carregat el procés en memòria ni l’ha afegit a la llista de processos en execució, però ho té tot preparat per a fer-ho. Normalment quan un procés es crea s’admet ràpidament i passa a l’estat de llest, però es possible que si hi haja molts processos en execució i el sistema estiga sobrecarregat, de manera que el sistema operatiu retarde la seua admissió amb l’objectiu de no saturar més el sistema, ja que el processos competixen pels recursos del sistema, principalment RAM i CPU.
+		</li>
+		<li>
+			La transició <strong>de llest a admés</strong> es produïx quan el sistema operatiu calcula que hi ha prou recursos perquè el procés s’execute.
+		</li>
+		<li>
+			Estat de <strong>Llest</strong>: el procés és afegit a la llista de processos en execució i esta esperant el seu torn per a ser assignat al processador per a la seua execució. En una CPU clàssica (amb un sol nucli) en cada moment només hi ha un procés en execució. La resta de processos estan en estat llest fins que se'ls concedeix el torn de CPU, moment en què passen a l’estat d’execució.
+		</li>
+		<li>
+			La transició <strong>de llest a execució</strong> ocorre quan en el canvi de context es decidix el procés que passarà a executar-se.
+		</li>
+		<li>
+			Estat d’<strong>execució</strong>: les instruccions del procés s’estan executant per la CPU.
+		</li>
+		<li>
+			La transició <strong>d’execució a llest</strong> ocorre quan expira el temps de CPU assignat al procés. En eixos moments es preserven en el PCB les dades necessaris per a un futur restabliment i es dona l’oportunitat a un altre procés en avançar en la seua execució.
+		</li>
+		<li>
+			La transició d’<strong>execució a espera</strong> ocorre quan el procés necessita d’un recurs per a poder continuar amb la seua execució però este no està disponible, per la qual cosa ha d’esperar-se. Com el temps de CPU és el recurs més valorat no té sentit desaprofitar-lo sense fer res. El que es fa és detindre l’execució del procés i posar-lo en una llista d’espera on es quedarà detingut fins que eixe recurs estiga disponible i el procés puga continuar. Per exemple, un procés pot necessitar carregar alguna cosa des de la memòria secundària, esperar la resposta d’un servidor remot en Internet o que l’usuari polse un tecla. Tot això en temps de processador pot allargar-se molt el que alentiria la resta de processos i en el temps de resposta que percep l’usuari.
+		</li>
+		<li>
+			Estat d’<strong>espera</strong>: El procés està en llista d’espera fins que ocórrega l’esdeveniment que està esperant, com per exemple la terminació d’una operació d’E/E.
+		</li>
+		<li>
+			La transició <strong>d’espera a llest</strong> ocorre quan l’esdeveniment que havia sol·licitat el procés ha acabat. En eixe moment el procés serà capaç de continuar amb la seua execució, però ha d’esperar el seu torn com la resta. El sistema operatiu passa el procés de la llista de processos en espera a la llista de processos llestos.
+		</li>
+		<li>
+			Estat d’<strong>acabat</strong>: el procés s’ha extret del grup de processos executables pel sistema operatiu. Després que un procés es marca com acabat s’alliberen els recursos utilitzats pel procés, per exemple, la memòria.
+		</li>
+		<li>
+			La transició d’<strong>execució a acabat</strong> ocorre quan el programa acaba, bé de manera normal perquè per exemple l’usuari o decidix, bé perquè ha hagut algun tipus d’error que impedix continuar la seua execució normal.
+		</li>
+	</ul>
+
+	<p>
+		Una altra manera gràfica d’expressar els estats pels quals passa un procés en mitjançant l’ús de cues. La següent figura mostra una cua d’entrada, on el nucli s’anota els processos que sol·liciten entrar al sistema. Quan a un procés se li assignen tots els recursos que necessita per executar-se se’l passa de la cua d’entrada a la cua de processos llestos. D’esta cua anirà entrant i eixint dins del mecanisme de concurrència. Si un procés necessita d’algun recurs es desviarà a la cua de processos en espera on es quedarà fins que el tinga, moment en què es passarà de nou a la cua de processos llestos. Quan un procés acaba es passa a la cua de processos finalitzats, de la qual es llevarà quan s’hagen alliberat els recursos que se li havia assignat durant la seua execució.
+	</p>
+
+	<figure>
+		<img src="imatges/cues.png" />
+	</figure>
+
+
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Gestió d'arxius/Arxius</h2>
+
+	<h3>Els arxius</h3>
+
+	<p>
+		Des del punt de vista d’un usuari la informació es guarda sempre en arxius. Un arxiu ve a ser com un contenidor de dades i està format per una seqüència de bytes que expressa algun tipus d’informació com poden ser imatges, vídeos, documents de text, programes, etc.
+	</p>
+	<p>
+		Els arxius són independents del dispositiu on es graven i del programa que els crea. D’esta manera, un arxiu creat per un programa pot ser utilitzat per un altre, així com gravat i transmés en diferents medis físics. L’important és l’organització interna de les dades dins de l’arxiu que ha de ser coneguda per aquells programes que el volen utilitzar. Per exemple, si fem una foto jpeg en un mòbil, l’arxiu que l’emmagatzema conté la seqüència dels píxels que forma la imatge però organitzada i estructurada d’una manera segons l’estàndard jpeg. Si obrim esta imatge amb un programa tipus GIMP, com este coneix l’estàndard sabrà interpretar el contingut de l’arxiu i extraure els píxels de la imatge.
+	</p>
+	<p>
+		Els arxius, a banda de les dades que li són pròpies, contenen metadades, entenent estes com informació addicional referida al propi arxiu i a les dades que conté. Estes metadades les afegix el programa que crea o modifica l’arxiu. Seguint amb l’exemple de l’arxiu jpeg, serien metadades: la data en què es va prendre la foto, la velocitat d’obturació, l’obertura del diafragma, la resolució, el model del mòbil o informació de geolocalització GPS, per citar alguns exemples.
+	</p>
+	<p>
+		Els arxius internament se subdividixen en diferents blocs de dades. Inicialment sol hi haver una capçalera amb metadades i referències a la resta de blocs de l’arxiu. El que contenen els blocs ja depén del tipus d’arxiu.
+	</p>
+
+
+	<figure>
+		<img src="imatges/Estructura arxius.svg" />
+	</figure>
+
+
+	<h3>Operacions amb arxius</h3>
+	<p>
+		Els processos no manipulen els arxius directament sinó que ho fan sempre a través del sistema operatiu que ofereix tota una sèrie d’operacions per a manipular-los.
+	</p>
+	<p>
+		Entre les operacions més comunes tenim:
+	</p>
+	<ul>
+		<li>Crear un arxiu buit.</li>
+		<li>Esborrar un arxiu alliberant l’espai que ocupa en memòria secundària.</li>
+		<li>Obrir un arxiu. Implica buscar-lo en memòria secundària i copiar-lo a memòria principal.</li>
+		<li>Tancar un arxiu alliberant l’espai en memòria que ocupa en memòria principal.</li>
+		<li>Llegir i escriure dades.</li>
+		<li>Reanomenar un arxiu.</li>
+	</ul>
+
+
+	<h3>Tipus d'arxius</h3>
+	<p>
+		Podem classificar-los atenent a dos criteris diferents: Segons el seu contingut i segons com guarden la informació.
+	</p>
+	<p>
+		Segons el seu contingut
+		tenim:
+	</p>
+
+	<ul>
+		<li>
+			Arxius executables<br>
+			Contenen instruccions que al ser interpretades pel processador donen com a resultat un programa en execució.
+		</li>
+		<li>
+			Arxius no executables<br>
+			També coneguts com arxius de dades: Contenen informació que serà utilitzada pels propis arxius executables per al seu funcionament. Estes dades poden ser dades d'usuari (textos, fotos, gràfics, etc.) o dades que necessiten els programes per al seu propi funcionament.
+		</li>
+	</ul>
+
+	<br>
+	<p>
+		Segons la manera en què es guarda la informació tenim:
+	</p>
+	<ul>
+		<li>
+			Arxius binaris<br>
+			Un arxiu binari està format per una seqüència de bits. Serà funció de l'aplicació que ha creat dit arxiu comprendre el significat d'eixos bits. Es a dir, els arxius binaris només poden ser creats i llegits per aquells programes que han sigut creats específicament per a comprendre eixa informació.
+			Per exemple un arxiu .jpg és un arxiu binari i només podrà ser creat o llegit per programes d'edició gràfica que s'han programat específicament per a comprendre com s'organitzen els bits dins d'un arxiu jpg.
+		</li>
+		<li>
+			Arxius de text<br>
+			Comencem per aclarir que tots els arxius són binaris, inclosos els de text. Ara bé, en un arxiu de text la seqüència de bits està agrupada d'una manera estandarditzada, de manera que estos bits sempre formen números que estan assignats a caràcters.
+			Per exemple, un tipus d'arxiu de text molt usats són els acabats en extensió .txt. Estos arxius solen estan codificats en ASCII. Així en ASCII, cada seqüència de 8 bits forma un byte, al qual se li associa una lletra de l'alfabet o un determinat símbol.
+
+		</li>
+	</ul>
+
+	<p>
+		<i>
+			Nota: Els arxius executables sempre són binaris mentres que els arxius de dades poden ser binaris o de text.
+		</i>
+	</p>
+
+
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Fils</h2>
+
+	<h3>Fils d'execució</h3>
+
+	<p>
+		Gràcies als processos, diferents programes s’executen concurrentment compartint els recursos de l’ordinador. Els processos són entitats separades que executen el seu propi codi i manipulen les dades internament sense interferència d’altres processos oferint així un alt grau de seguretat. Cada procés té assignat una zona de memòria, utilitza uns arxius, unes connexions de xarxa, uns dispositius, etc., que estan protegits davant l’activitat d’altres processos. Esta estricta separació té el problema que dificulta l’intercanvi de dades entre els processos i, encara que els sistemes operatius oferixen mecanismes de comunicació i intercanvi de dades, estos no són eficients i alentixen l’execució dels processos.
+	</p>
+	<p>
+		Actualment és comú que dins d’una mateixa aplicació es puguen executar tasques de manera simultània. Per exemple, en un navegador cada pestanya és independent de les altres, i mentre mirem un vídeo en una, podem estar baixant un arxiu i consultant un diccionari d’anglés en un altra. Estes tasques són independents però al mateix temps formen part de la mateixa aplicació.
+	</p>
+	<p>
+		La necessitat de poder executar tasques simultànies dins d’una mateixa aplicació i facilitar la comunicació entre elles va donar pas a l’aparició dels fils d’execució, també coneguts com a processos lleugers, subprocessos o threads en anglés. És habitual cridar al processos ‘tradicionals’ processos pesats per a distingir-los dels processos lleugers.
+	</p>
+	<p>
+		Inicialment tot procés comença amb un fil d’execució i posteriorment este pot crear tants fils com necessite. Tots estos fils compartixen els mateixos recursos (memòria, arxius, connexions...) pel que l’intercanvi de dades és immediat i un fil pot accedir i vore que fa un altre fil. Al mateix temps, cada fil té un seu propi estat, el seu propi comptador de programa i la seua pròpia copia dels registres de la CPU.
+	</p>
+	<p>
+		Cada sistema operatiu té la seua manera de crear i de gestionar els fils. Comentarem el de Linux per ser fàcil d’entendre. En Linux un fil és simplement un procés que té la capacitat de compartir alguns recursos amb altres processos i es tractat pel planificador de processos com un procés normal.
+	</p>
+
+	<figure>
+		<img src="imatges/fils.png" />
+	</figure>
+
+	<p>
+		Els avantatges dels fils són grans. És tarda molt menys en crear-se un fil que crear un procés nou; també són més ràpids d’eliminar. Els fils es comuniquen ràpidament al compartir el mateix espai de memòria.
+	</p>
+
+	<h3>Fils del processador</h3>
+
+	<p>
+		Amb el temps la complexitat del programari ha anat augmentant exigint cada vegada més potència de càlcul. Inicialment les CPU executaven els programes de manera seqüencial, un programa havia d’acabar perquè un altre poguera ser executat. Com això era molt ineficient van aparéixer diferents maneres d'esprémer el maquinari al màxim. Per una banda està la concurrència que, com hem vist, simula un paral·lelisme entre processos. Una altra manera de millorar la velocitat d’execució és tindre més d’una CPU que execute diferents processos simultàniament. En este cas l’execució paral·lela és real. Cada CPU rep el nom de nucli.
+	</p>
+
+	<figure>
+		<img src="imatges/nuclis.png" />
+	</figure>
+
+	<p>
+		El concepte de processador multinucli, com el seu nom indica, consistix en replicar n nuclis dins d’un mateix encapsulat de processador.
+	</p>
+	<p>
+		Cada nucli sol tindre una memòria cache de primer nivell o L1. Esta es subdividix en dos seccions, una per a dades i altra per a instruccions. Esta cache és de baixa capacitat i molt ràpida, operant a la mateixa velocitat que el processador.
+		Dins del mateix nucli hi ha una altra cache de segon nivell o L2. És de més capacitat que la L1 però més lenta i sol unificar dades i instruccions.
+		Dins dels processador però fora dels nuclis tenim una memòria cache de tercer nivell o L3 comuna a tots els nuclis.
+	</p>
+	<p>
+		En el processador també trobem moltes altres parts com un controlador de memòria, controlador de busos, components per al processament gràfic, entre altres. Tots estos components, inclosos els nuclis, es troben connectats mitjançant una xarxa d’interconnexió.
+	</p>
+	<p>
+		En els processadors multinucli estem replicant CPU i afegint circuits addicionals perquè tot funcione coherentment. Quants més nuclis els processadors augmenten en complexitat, ocupen més espai i són més cars de fabricar. Una altra manera de millorar l’eficiència dels processadors a un cost menor i incrementant molt poc les dimensions dels xips (al voltant d’un 5%) ha sigut la tecnologia de fils d’execució a nivell de CPU, també anomenada hyperthreading.
+	</p>
+	<p>
+		Esta tecnologia permet que cada CPU puga executar simultàniament més d’un procés (o fil) simultàniament. Així un processador amb dos nuclis amb dos fils per nucli es capaç d’executar 4 processos simultàniament. Per aconseguir això cal duplicar part dels circuits com la dels registres del processador (PC, IR, registres generals) però mantenint comunes la gran majoria, com la cache, les unitats d’execució i els busos interns. Cal dir que este mecanisme no és tant eficient com un sistema multiprocessador però aconseguix augment de velocitat superior al 25%.
+	</p>
+
+	<figure>
+		<img src="imatges/Cache.png" />
+	</figure>
+
+	<p>
+		Amb tot això dels processadors multinucli i multifils s’ha de tindre en compte que no totes les aplicacions són capaces d’utilitzar de manera simultània més d’un nucli per a executar les seues tasques. L’avantatge de tindre diversos nuclis es veu en determinades aplicacions com navegadors (cada pestanya és un fil d’execució), bases de dades (cada consulta o inserció pot ser un fil d’execució), servidors web (cada petició d’un usuari pot ser un fil), videojocs, etc.
+	</p>
+	<p>
+		La següent imatge és una captura de pantalla del monitor de tasques de Windows. Mostra un ordinador amb un processador (1 socket) de 4 nuclis amb 2 fils d’execució que de cara al sistema operatiu es com si disposara de 8 CPU (processadors lògics).
+	</p>
+
+	<figure>
+		<img src="imatges/monitor tasques.png" />
+	</figure>
+
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Concurrència i canvi de context</h2>
+
+	<p>
+		Si s’obre el monitor del sistema es pot vore com la columna de processos està formada per una llarga llista on conviuen una gran quantitat de processos del sistema operatiu barrejada amb processos que corresponen a les aplicacions que l’usuari té en execució.
+	</p>
+
+	<p>
+		Quan un usuari està davant d’un ordinador amb moltes aplicacions obertes simultàniament té la sensació de que totes elles s’estan executant al mateix temps. Pot escoltar música mentres escriu en el processador de textos, tindre el navegador obert amb diverses pestanyes i estar baixant-se algun arxiu des d’Internet. Per a un usuari les aplicacions funcionen per elles mateixa i el sistema operatiu és poc més que el fons de pantalla i unes finestres amb un punter de ratolí. La realitat però, és que els programes s’estan executant concurrentment.
+	</p>
+
+	<p>
+		Explicarem que és això de la concurrència amb un símil. Imaginem que hem de llegir 5 novel·les. La novel·la seria com un procés i el fet de llegir-les seria com executar les instruccions d’este procés. El normal per a una persona seria llegir una novel·la i en acabar-la començar-ne una altra; però en el cas d’un ordinador seria com que per a poder executar un programa abans s’hauria de finalitzar el programa anterior ja que només hi ha un processador i no es bona idea barrejar les instruccions i les dades dels processos. Evidentment això és molt millorable.
+	</p>
+
+	<p>
+		Podem pensar en anar alternant els capítols de cada novel·la. Per a nosaltres això és dificultós perquè mentalment ens costaria separar els arguments de cada novel·la. Per a l’ordinador en canvi, que executa les instruccions d’una manera mecànica, no li suposa cal entrebanc.
+	</p>
+
+	<p>
+		Encara així, està dedicant-li massa temps a cada capítol mentres la resta de novel·les estan esperant el seu torn a avançar en la seu lectura. Podem anar més enllà i pensar en dedicar-li a cada novel·la uns segons, o millor encara uns mil·lisegons, d’esta manera anem llegint les 5 novel·les a poc a poc i cap d’elles té la sensació d’estar desatesa.
+	</p>
+
+	<p>
+		Vist des de fora pareix que les novel·les s’estant llegint al mateix temps de manera paral·lela quan la realitat és que s’executen alternativament, o en paraules més tècniques <strong>concurrentment</strong>.
+	</p>
+
+	<p>
+		Esta clar que cada novel·la costarà 5 vegades més en ser llegida, però en conjunt el temps invertit serà el mateix. Este es el mecanisme que usen els sistemes operatius.
+	</p>
+
+	<p>
+		El sistema operatiu està format per molts programes que s’encarreguen de tots els detalls sobre el control del maquinari i el programari.
+		D’eixos programes hi ha un anomenat <strong>planificador de processos</strong> (o scheduler) que s’encarrega de decidir quin procés es posa en marxa i durant quant de temps. Este programa forma part del nucli del sistema operatiu.
+	</p>
+
+	<p>
+		Posar en marxa un procés implica en primer lloc detindre el que està en execució i guardar tota aquella informació que serà necessària perquè quan li toque de nou el torn puga reprendre la seua execució en el punt on havia sigut interromput. El nucli del sistema operatiu manté una <strong>llista de processos en execució</strong> i de cada un d’ells guarda un registre anomenat <strong>PCB</strong> (Process Control Block) amb informació com:
+	</p>
+
+	<ul>
+		<li>Identificador del procés: cada procés està numerat amb un nombre.</li>
+		<li>L’estat del procés: en execució, llest, espera, bloquejat (ho vorem a continuació).</li>
+		<li>El valor dels registres de la CPU (PC, A, R1, R2..) necessaris perquè el procés continue amb la seua execució després d’una canvi de context.</li>
+		<li>La prioritat: marca la seua importància davant altres processos (ho vorem després).</li>
+		<li>Llista de recursos assignats: arxius i connexions de xarxa que està utilitzant.</li>
+		<li>Propietari: l’usuari que ha llançat el programa.</li>
+	</ul>
+
+	<p>
+		Un procés en execució, per ell mateix, continuarà executant-se indefinidament. Es per això que es necessari que cada cert temps (uns 100 ms) es pose en marxa el planificador de processos i decidisca el següent procés que continuarà amb la seua execució. El mecanisme de llevar un procés i posar-ne un altre es coneix com a <strong>canvi de context</strong>.
+	</p>
+
+	<p>
+		Per temes de eficiència el canvi de context ha de ser el més ràpid possible per a deixar la CPU lliure per a la resta de processos. Passat el temps assignat a un procés hi ha un nou canvi de context que tornarà a decidir el següent procés a executar-se, i així contínuament.
+	</p>
+
+	<p>
+		En la següent figura volem expressar gràficament l’evolució de l’execució de 3 processos P1, P2 i P3 executant-se concurrentment. Con es pot vore pintat en roig, cada cert temps es posar en marxa el planificador de processos (PP) que efectua el canvi de context. En l’exemple els processos s’aniran executant en ordre P1, P2, P3 de manera consecutiva.
+	</p>
+
+	<p>
+		La figura davall de l’anterior mostra una possible distribució dels processos dins de la memòria RAM. D’esta manera el procés del nucli del sistema operatiu comença a partir de l’adreça 0, el procés 1 a partir de l’adreça 1.000, el procés 2 a partir de la 2.500 i el procés 3 de la 3.500. Es important recordar que el registre del comptador de programa (PC) apunta a la següent instrucció que es va a executar. En la figura el PC apunta a alguna adreça corresponent al procés 2 i, mentre el procés 2 estiga dins del seu quantum de temps, s’anirà autoincrementant segons avança l'execució del procés.
+	</p>
+
+	<p>
+		Quan acaba el seu quantum el planificador de processos guarda el PC, justament a la resta de registre interns del processador en el PCB, i restaura els registres, entre ells el PC, del procés que va ha restablir l’execució, el procés P3 en l’exemple.
+	</p>
+
+
+	<figure>
+		<img src="imatges/Evolucio temporal processos.png" />
+	</figure>
+
+
+</body>
+
+</html>

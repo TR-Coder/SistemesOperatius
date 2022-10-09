@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+	<h2>Processos</h2>
+	<p>
+		Un programa està format per una seqüència d’instruccions executades pel processador que permeten controlar el maquinari de l’ordinador i fer una sèrie de càlculs seguint la lògica que el programador va pensar al crear el programa.
+	</p>
+	<p>
+		A l’estudiar el funcionament de la màquina de Von neumann van vore que estes instruccions s’encarreguen de manipular unes dades que estan emmagatzemades en la memòria principal o en els registres interns del processador. Esta manipulació consistix en operacions com moure les dades entre la memòria i el processador, fer càlculs matemàtics en l’ALU, comparar dades entre elles, etc.
+	</p>
+	<p>
+		Els programes estan gravats en memòria secundària ja que esta, en comparació amb la memòria principal, és de gran capacitat i és no volàtil. Quan l’usuari decidix llançar una aplicació el que fa es clicar sobre la seua icona o buscar-la en el menú d’aplicacions del sistema operatiu.
+	</p>
+
+	<figure>
+		<img src="imatges/Programa_memoria_processador.png" />
+	</figure>
+
+	<p>
+		Perquè un programa es puga executar s’han de copiar les sues instruccions i les dades que necessita en la RAM. Això implica buscar el programa on estiga gravat, buscar una zona de la RAM disponible per a copiar-les, i finalment afegir d’alguna manera eixe programa a la llista de programes que s’estan executant en eixos moments. Tots estos passos ocorren de manera transparent a l’usuari que només ha d’esperar uns segons a que el sistema operatiu faça estes tasques entre bastidors.
+	</p>
+
+	<p>
+		Quan un programa es carrega en la memòria principal i es posa en execució es convertix en el que s’anomena un procés o tasca.
+		Es sol definir un <strong>procés</strong> com un programa en execució.
+	</p>
+
+	<p>
+		Pensem en una aplicació com la calculadora. En un moment donat podem tindre en execució més d’una calculadora al mateix temps. L’aplicació calculadora està gravada una sola vegada en memòria secundària, però podem tindre en memòria principal més d’una activa al mateix temps. Cada calculadora activa és un procés; cada procés és independent i manipula les seues pròpies dades sense interferir amb la dels altres, encara que siga, com en la nostra calculadora, la mateixa aplicació. En este cas, les dades poden ser els nombres i els càlculs que s’estan fent, la posició i les dimensions de la finestra en la pantalla, el mode de funcionament de la calculadora (normal o científic), etc.
+	</p>
+
+	<p>
+		L’encarregat de buscar un programa en memòria secundària, assignat-li RAM, posar-lo en marxa, detindre’l i portar un control del seu estat i del recursos que utilitza és el sistema operatiu.
+	</p>
+
+	<p>
+		Un procés consistix en les <strong>instruccions</strong> que executarà el processador i un <strong>estat</strong>. Este estat varia amb el temps segons el programa es va executant i està format per les dades del propi programa, dades de l’usuari, el valors dels registres de la CPU, les connexions de xarxa que està utilitzant, els arxius que té oberts i altres dades que, con vorem, són necessàries per a tindre sota control el funcionament de tots el processos del sistema amb l’objectiu de que tot el conjunt siga estable i vaja el més ràpid possible.
+	</p>
+
+	<p>
+		Per a simplificar assumirem que tenim un processador amb un sol nucli; més endavant ho estendrem a processadors a més nuclis i explicarem el concepte de fil d’execució.
+	</p>
+
+</body>

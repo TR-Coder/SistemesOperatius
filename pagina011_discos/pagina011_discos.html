@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Gestió d'arxius/Dispositius d'emmagatzemament: discos</h2>
+
+	<h3>Discos durs</h3>
+	<p>
+		Un disc dur, o HDD (Hard Disk Drive), és un dispositiu d’emmagatzemament no volàtil que utilitza un sistema de gravació magnètica per a guardar els bits d’informació.
+		Els discos estan en una caixa hermèticament tancada a l’interior de la qual estan els components mecànics i electrònics que el formen.
+	</p>
+
+	<h4>Estructura física</h4>
+	<p>
+		Un disc està físicament format per un o més plats units per un mateix eix que els fa girar gràcies a un motor a una velocitat constant que sol ser de 7.200 rpm (revolucions per minut).
+		Els discos sempre està girant mestre l’ordinador està en marxa.
+	</p>
+	<p>
+		Cada plat té dos cares, una inferior i una superior, sobre les quals està depositat un material magnetitzable. Per a situar-se sobre la zona on llegir/escriure la informació disposa d’uns braços (un per cara) sobre els quals estan uns capçals de lectura/escriptura. Per simplicitat, els braços se solen moure tots al mateix temps.
+	</p>
+
+	<figure>
+		<img src="imatges/Estructura física disc dur.png" />
+	</figure>
+
+	<p>
+		Cada vegada que es fa una operació de lectura en el disc, els braços s’han de desplaçar fins a la zona on comencen les dades, esperar a que estes passen per davall del capçal i llegir-los.
+		L’operació d’escriptura és similar a l’anterior.
+	</p>
+	<p>
+		Els capçals de lectura/escriptura no toquen mai el disc sinó que floten molt a prop de la seua superfície. Una mínima quantitat de pols o una forta vibració pot fer que el capçal toque la superfície i danye els disc i les dades que conté, d’ací que tot el conjunt estiga protegit dins d’una caixa.
+	</p>
+
+	<p>
+		Els capçals produïxen unes variacions magnètiques que provoquen que la superfície es magnetitze verticalment en dos direccions possibles segons es grave un 0 o un 1.
+	</p>
+
+	<figure>
+		<img src="imatges/Capçal lectura i escriptura.png" />
+	</figure>
+
+	<h4>Estructura lògica</h4>
+
+	<p>
+		La informació sobre el disc seguix un estructura que queda definida per una pista, un cilindre i un sector.
+	</p>
+	<p>
+		Cadascuna de les cares d’un disc es dividix en anells concèntrics anomenats pistes. Com els braços es mouen junts, quan es situen formen una pila de pistes que s’anomena cilindre.
+	</p>
+	<p>
+		Cada pista es dividix en trams anomenats sectors que són la unitat mínima d’informació que es pot llegir o escriure en un disc.
+	</p>
+
+	<p>
+		Els sectors estan situats de manera contigua format les pistes. Els sectors venen gravats de fàbrica i és la zona en què es graven els bits d’informació. Ara bé, no tot l’espai que ocupa un sector es dedica a informació útil dels arxius, hi ha també informació addicional que ajuda a la controladora dels disc ha col·locar els capçals i identificar cada sector.
+	</p>
+	<p>
+		Si es poguera vore una pista tindria un estructura com:
+	</p>
+
+	<figure>
+		<img src="imatges/Estructura pista.png" />
+	</figure>
+
+	<p>
+		Con veiem els sectors estan un poc separats entre ells, esta separació evita interferències magnètiques entre sectors i ajuda al posicionament dels capçals.
+	</p>
+	<p>
+		Els sectors tenen la següent estructura:
+	</p>
+
+	<figure>
+		<img src="imatges/Estructura sector.png" />
+	</figure>
+
+	<p>
+		Cada sector comença amb una capçalera que conté la seua posició dins del disc (nombre de plat, de pista i de sector); també sol hi haver un camp que indica si el sector és vàlid o invàlid.
+		Tot seguit hi ha un espai de 4K on es grava la informació dels arxius.
+		Per últim, està el camp ECC que ve a ser com un nombre que permet validar si les dades estan gravades de manera correcta o no.
+	</p>
+	<p>
+		Encara que el contingut d’un sector es pot modificar, el que passa en realitat és que la informació completa que conté és sobreescrita per la informació nova. Recordem que el sector és la unitat mínima de lectura/escriptura en disc.
+	</p>
+	<p>
+		Al contrari del que passa amb els SSD, els bytes d’informació d’un sector es poden modificar.
+		Bé, més que de modificació hem de parlar de sobreescriptura ja que la nova informació del sector substituirà en el mateix lloc a l’antiga.
+	</p>
+	<p>
+		Els discos tenen una controladora formada per un conjunt de components electrònics que s’encarreguen de la gestió d’energia, mantindre la rotació i el moviment de les diferents parts del disc i de controlar el flux d’informació amb el sistema operatiu.
+	</p>
+
+	<figure>
+		<img src="imatges/Controladora.png" />
+	</figure>
+
+</body>
+
+</html>

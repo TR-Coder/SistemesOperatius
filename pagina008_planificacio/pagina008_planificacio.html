@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Planificació de processos</h2>
+
+	<p>
+		Una de les tasques que ocorren durant el canvi de context és la <strong>planificació de processos</strong>.
+		Consistix en decidir el moment en què un procés es pot carregar en memòria i passar a formar part de la llista de processos llestos, així com la de determinar quin és l’ordre en què els processos s’han d’agafar de la llista de llestos perquè s’executen i durant quant de temps estarà en execució.
+		La presa d’estes decisions bé donada per un algoritme anomenat <strong>algoritme de planificació</strong>.
+	</p>
+	<p>
+		No entrarem en massa detalls, vorem l’algoritme de planificació Round-Robin i el de prioritats.
+	</p>
+
+	<h3>Round Robin</h3>
+
+	<p>
+		Este algoritme repartix el temps de CPU de manera equitativa entre tots els processos de la llista de llestos. Este temps s’anomena quantum, transcorregut el qual es tria el següent procés de la llista per a ser executat per la CPU. Els processos entre en una cua FIFO (Firs Input First Output) on roten circularment en torn.
+	</p>
+
+	<figure>
+		<img src="imatges/Round Robin.png" />
+	</figure>
+
+	<h3>Prioritats</h3>
+
+	<p>
+		S’assigna a cada procés un prioritat de manera que els més importants seran executats abans que els de baixa prioritat. La prioritat pot ser assignada pel sistema operatiu o per l’usuari.
+	</p>
+
+	<p>
+		Els algoritmes amb prioritat poden ser expulsius o no expulsius.
+		<strong>Expulsiu</strong> significa que si arriba un procés amb major prioritat que el que s’està executant este es deté i passa a executar-se el de major prioritat.
+		<strong>No expulsiu</strong> significa que si arriba un procés amb major prioritat s’espera a que acabe el que s’està executant i en acabar passa a executar-se el primer de tots.
+		Este sistema de prioritats es sol combinar a un mecanisme anomenat envelliment.
+		La idea és simple, podria donar-se el cas que un procés de baixa prioritat mai s’executara perquè li passen tots el processos de major prioritat per davant; això es soluciona augmentant progressivament la prioritat dels processos que esta en espera.
+	</p>
+
+	<p>
+		En el següent exemple assumim una planificació de prioritats de tipus expulsiva. Considerem que la prioritat 1 és la major i 5 la menor. Amb este sistema si quan un procés entra la cua de processos llestos té més prioritat que el que s’està executant, es deté el que està en execució que s’afegix a la cua de llestos fins que acabe el de major prioritat. Si dos processos tenen la mateixa prioritat es col·loquen segons l’ordre en què van arribar.
+	</p>
+
+
+	<figure>
+		<img src="imatges/Prioritats expulsives.png" />
+	</figure>
+
+	<h3>Múltiples cues</h3>
+
+	<p>
+		Hi ha moltes maneres de planificar els processos i les estratègies poden ser com les anteriors o una combinació entre elles. Tinguem en compte que en realitat no existix una política de planificació òptima sinó que depenen dels tipus de procés. No és el mateix un procés que està executant una aplicació d’usuari com un navegador, que un procés que està recollint dades d’uns sensors per a després de fer uns càlculs enviar uns senyals a uns actuadors, també és diferent a un procés que s’activa cada cert temps per a fer algun tipus de còpia de seguretat. També hem de tindre en ment que el sistemes operatius no sols estan en dispositius tipus mòbil o PC sinó que poden formar part d’un sistema industrial o en un sistema de navegació d’un avió, per citar algun exemple.
+	</p>
+
+	<p>
+		Un tipus de planificació habitual és aquella on, en lloc d’una cua única, podem tindre diferents cues cadascuna amb la seua pròpia planificació. En este cas, una possibilita és la de que els processos s’assignen a cada cua segons el seu tipus o prioritat, primer s’executen els processos de la primera cua i quan es buida passen a executar-se és de la segona i així successivament.
+	</p>
+
+	<p>
+		En Windows, la planificació de processos es basa en la utilització de cues múltiples de prioritats. Cada cua utilitza Round-Robin i si arriba un procés amb major prioritat que el que està en execució se li assigna el processador.
+	</p>
+
+
+</body>
+
+</html>
