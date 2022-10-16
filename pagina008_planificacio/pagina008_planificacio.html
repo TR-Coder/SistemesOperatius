@@ -29,7 +29,8 @@
 	<h3>Round Robin</h3>
 
 	<p>
-		Este algoritme repartix el temps de CPU de manera equitativa entre tots els processos de la llista de llestos. Este temps s’anomena quantum, transcorregut el qual es tria el següent procés de la llista per a ser executat per la CPU. Els processos entre en una cua FIFO (Firs Input First Output) on roten circularment en torn.
+		Este algoritme repartix el temps de CPU de manera equitativa entre tots els processos de la llista de llestos.
+		Este temps s’anomena <strong>quantum</strong>, transcorregut el qual es tria el següent procés de la llista per a ser executat per la CPU. Els processos entre en una cua FIFO (Firs Input First Output) on roten circularment en torn.
 	</p>
 
 	<figure>
@@ -42,11 +43,19 @@
 		S’assigna a cada procés un prioritat de manera que els més importants seran executats abans que els de baixa prioritat. La prioritat pot ser assignada pel sistema operatiu o per l’usuari.
 	</p>
 
+	<p>Els algoritmes amb prioritat poden ser expulsius o no expulsius:</p>
+
+	<ul>
+		<li>
+			<strong>Expulsiu</strong> significa que si arriba un procés amb una prioritat major que el que s’està executant, este es deté immediatament i passa a executar-se el de major prioritat.
+		</li>
+		<li>
+			<strong>No expulsiu</strong> significa que si arriba un procés amb major prioritat s’espera a que acabe el que s’està executant i en acabar passa a executar-se el primer de tots.
+		</li>
+	</ul>
+
 	<p>
-		Els algoritmes amb prioritat poden ser expulsius o no expulsius.
-		<strong>Expulsiu</strong> significa que si arriba un procés amb major prioritat que el que s’està executant este es deté i passa a executar-se el de major prioritat.
-		<strong>No expulsiu</strong> significa que si arriba un procés amb major prioritat s’espera a que acabe el que s’està executant i en acabar passa a executar-se el primer de tots.
-		Este sistema de prioritats es sol combinar a un mecanisme anomenat envelliment.
+		La planificació per prioritats se sol combinar a un mecanisme anomenat <strong>envelliment</strong>.
 		La idea és simple, podria donar-se el cas que un procés de baixa prioritat mai s’executara perquè li passen tots el processos de major prioritat per davant; això es soluciona augmentant progressivament la prioritat dels processos que esta en espera.
 	</p>
 
