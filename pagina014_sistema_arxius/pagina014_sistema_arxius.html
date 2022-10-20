@@ -142,13 +142,16 @@
 
 	<h3>Sistemes d'arxius més habituals</h3>
 	<p>
-		Hi ha molts sistemes d’arxius i la compatibilitat entre ells no és massa bona
+		Existixen diferents implementacions de sistemes d’arxius, estos depenen del sistema operatiu que usem o del dispositiu amb què estem treballant.
+		Els més comuns són:
 	</p>
 
 	<ul>
 		<li>
 			FAT32<br>
-			Pese a ser molt antic (1996) encara s’utilitza molt ja que és suportat pels sistemes operatius més estesos (Windows, MacOs i GNU/Linux). La majoria d’unitats USB solen estar formatades en FAT32 o exFAT. La seua limitació més important és que no permet guardar arxius de més de 4GB.
+			Pese a ser molt antic (1996) encara s’utilitza molt ja que és suportat pels sistemes operatius més estesos (Windows, MacOs i GNU/Linux).
+			La majoria d’unitats USB solen estar formatades en FAT32 o exFAT.
+			La seua limitació més important és que no permet guardar arxius de més de 4GB.
 		</li>
 		<li>
 			exFAT<br>
@@ -156,24 +159,32 @@
 		</li>
 		<li>
 			NTFS<br>
-			És el successor de FAT32 i el sistema d’arxius del sistemes operatius Windows. Els Mac poden llegir els arxius formatats amb NTFS però no escriure en ells.
+			És el successor de FAT32 i el sistema d’arxius del sistemes operatius Windows.
+			Els Mac poden llegir els arxius formatats amb NTFS però no escriure en ells.
 		</li>
 		<li>
 			APFS+<br>
-			És el sistema d’arxius d’Apple. El sistemes GNU/Linux poden treballar amb ell, Windows en canvi pot llegir el contingut dels dispositius formatats amb ell però no escriure ells.
+			És el sistema d’arxius d’Apple.
+			El sistemes GNU/Linux poden treballar amb ell, Windows en canvi pot llegir el contingut dels dispositius formatats amb ell però no escriure ells.
 		</li>
 		<li>
 			Ext4<br>
-			És l'utilitzat per les distribucions GNU/Linux. Només poden ser utilitzats pels Linux i és incompatible amb Windows i MacOS.
+			És l'utilitzat per les distribucions GNU/Linux.
+			Només poden ser utilitzats pels Linux i és incompatible amb Windows i MacOS.
+		</li>
+		<li>
+			UDF<br>
+			És l’estàndard per a emmagatzemar informació en tecnologia òptica i s’utilitza en els CD, DVD i Blu-ray.
 		</li>
 	</ul>
 
+	<p>
+		Com es veu, la compatibilitat entre sistemes d’arxius no és massa bona. Això fa, per posar un exemple, que un disc dur formatat amb NTFS de Windows no puga ser llegit per un MAC OS X.
+	</p>
 
-
-
-
-
-
-</body>
-
-</html>
+	<p>
+		Habitualment, els USB i discos externs se solen formatar en el sistema d’arxius FAT32 o exFAT.
+		Este sistema és el que s’usava en Windows abans de l’NTFS, però, i a pesar de les seues limitacions, es continua utilitzant per ser el més compatible.
+		D’esta manera, un USB formatat en FAT32 o exFAT pot ser llegit per Windows, Linux i MAC OS.
+		Això sí, si tenim clar que un dispositiu l'utilitzarem només en un sistema operatiu cal formatar-lo en el sistema d’arxius actual d’eixe sistema ja que oferirà moltes millores respecte al FAT32 en quant a capacitat, velocitat i mesures de seguretat.
+	</p>

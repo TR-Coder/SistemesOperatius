@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Gestió d'arxius/Estructura</h2>
+
+	<h3>Aprofitament de l’espai disponible</h3>
+	<p>
+		Els arxius es van gravant i esborrant, generant-se buits que cal reutilitzar.
+		Enlloc de gravar-se de manera consecutiva en disc/ssd, els arxius se subdividixen en una sèrie de blocs amb l’objectiu d’aprofitar al màxim l’espai disponible.
+	</p>
+	<p>
+		La següent successió de figures representa un disc on anem gravant i esborrant programes.
+		Inicialment tenim tot l’espai buit i disponible per a gravar programes.
+	</p>
+
+	<figure>
+		<img src="imatges/Aprofitar espai 1.png" />
+	</figure>
+
+	<p>
+		Suposem que graven els programes roig, blau, verd, groc i gris.
+		Segons els gravem van ocupant un darrere de l’altre l’espai disponible.
+	</p>
+
+	<figure>
+		<img src="imatges/Aprofitar espai 2.png" />
+	</figure>
+
+	<p>
+		Suposem que esborrem el programa blau i el groc, per la qual cosa s’allibera l’espai que tenen ocupat.
+		Fixem-nos que si ara volem gravar el programa rosa no podrem fer-ho ja que no hi ha prou espai consecutiu on càpiga.
+	</p>
+
+	<figure>
+		<img src="imatges/Aprofitar espai 3.png" />
+	</figure>
+
+	<p>
+		Canviem d’estratègia.
+		Dividim el disc en blocs (sectors) de la mateixa longitud i els programes també.
+		Observem que ara el programa rosa ja cap.
+		També s'observa que el programa rosa ocupa tres blocs sencer però que hi ha un tros del quart bloc que se desaprofita (fragmentació interna)
+	</p>
+
+	<figure>
+		<img src="imatges/Aprofitar espai 4.png" />
+	</figure>
+
+
+	<h3>Clústers</h3>
+
+	<p>
+		En general, un sistema d’arxius és com una gran taula on s’anota com és la jerarquia de directoris, els arxius que conté cadascun d’ells i una relació dels sectors/pàgines on trobar les diferents parts que formen els arxius.
+		Ara vorem que la relació no és de sectors o pàgines sinó de clústers.
+	</p>
+
+	<p>
+		La capacitat d’un sector de disc sol ser de 512 bytes, això implica que una unitat de d’1TB necessitaria de 1024·1024·1024·1024 / 512 sectors.
+		Com es veu es una xifra enorme que, en la pràctica, és molt costosa de gestionar.
+	</p>
+
+
+	<p>
+		Per a reduir esta xifra, cadascun dels blocs en què es dividix un arxiu no correspon a un sector/pàgina sinó a un clúster que és la unitat mínima d’informació que es grava i llig en un disc/ssd.
+		Un clúster, conegut també com a unitat d’assignació, està format per un determinat nombre de sectors consecutius en el cas del discos durs i de pàgines en el cas dels SSD.
+		Les dimensions d’un clúster sol variar entre 512 bytes i 4K depenent del sistema d’arxiu i de la capacitat del disc.
+	</p>
+
+	<p>
+		Amb l’ús del clúster com a unitat d’emmagatzemament guanyem en eficàcia però a costa de perdre certa capacitat d’emmagatzemament.
+		Això passa perquè la dimensió d’un arxiu no sol ser múltiple d’un clúster per la qual cosa sol quedar sempre un espai en l´últim clúster de l’arxiu que no es pot aprofitar.
+		És el que es coneix com a fragmentació interna.
+		Per posar un exemple, suposem un clúster de 4KB.
+		Una arxiu de 4KB ocuparà els 4KB del clúster. Una arxiu de 4KB + 1B ocuparà 2 clústers, o siga 8KB, desaprofitant-se la quasi tot l’espai del segon clúster.
+	</p>
+	<p>
+		En la taula dels sistema d’arxius es graven doncs els clústers on podem trobar els diferents fragments dels arxius.
+		És responsabilitat del sistema d’arxius mantindre esta taula actualitzada i portar un registre dels clústers lliures per tal d’assignar-los quan siga necessari.
+		Com hem dit al començament del punt també és feina del sistema d’arxius mantindre l’estructura jeràrquica de directoris.
+	</p>
+
+
+	<h3>Particions</h3>
+
+	<p>
+		Els discos durs i les unitats basades en memòries flash (SSD, USB i les targetes de memòria) permeten subdividir el seu espai d’emmagatzemament en parts més menudes anomenades particions.
+		Cada partició és un espai d’emmagatzemament independent dins del mateix dispositiu que és vist pel sistema operatiu com un dispositiu físic independent.
+		D’esta manera un disc dur amb 3 particions es vist pel sistema operatiu com a 3 discos durs independents.
+		Una partició és una subdivisió i quan es crea, per ella mateixa, no conté cap sistema d’arxius que puga albergar dades.
+	</p>
+
+	<p>
+		Podem tindre un única partició que ocupe tot l’espai disponible o crear múltiples particions amb diferents mides.
+		Una unitat ha d’estar sempre particionada. Si pel que siga una part de de l’espai disponible de una unitat no està assignat a cap partició és un espai d’emmagatzemament que no es pot utilitzar, és com si no estiguera i s’anomena espai no assignat.
+	</p>
+
+
+	<p>
+		Hi ha diferents raons per a crear múltiples particions:
+	</p>
+	<ul>
+		<li>
+			Tindre més d’un sistema operatiu. Cadascun estarà allotjat en una partició diferent i permetrà tindre un espai propi i diferenciat que no interferirà amb l’altre.
+		</li>
+		<li>
+			Separar programes i dades. Per exemple podríem tindre un partició per a instal·lar el sistema operatiu i els programes, una per a dades i un altra per a les còpies de seguretat.
+			Està separació permet reinstal·lar el sistema operatiu i els programes en la seua partició tenint les dades intactes en les altres particions.
+		</li>
+		<li>
+			Particions especials. És habitual que durant el procés d’instal·lació d’un sistema operatiu s’hagen de crear particions especials que este utilitze per al seu funcionament intern o guardar informació per recuperar el sistema en cas d’errors.
+		</li>
+	</ul>
+
+	<p>
+		La informació de les particions està gravada en el propi dispositiu en l’anomenada <strong>taula de particions</strong>.
+		Les taules de particions més usades són la taula de particions <strong>MBR</strong> (Master Boot Record) i la <strong>GPT</strong> (GUID Partition Table o Global Unique Identifier Partition Table).
+		Estes taules contenen la informació d’on comença i acaba cada partició.
+	</p>
+	<p>
+		GPT és més moderna i supera a MBR ja que este últim està limitat a un màxim de 4 particions on cadascuna no pot superar els 2TB, a banda està més preparat a detectar i recuperar-se d’errors ja que GPT emmagatzema múltiples còpies en varies particions, de manera que si una taula de particions es corromp s’utilitzen les altres per a intentar reparar-la.
+	</p>
+
+	<h3>Volums</h3>
+
+	<p>
+		Com hem dit una partició és un tros de disc/ssd independent que no conté dades.
+		Si volem que una partició continga dades l’hem de formatar, o siga preparar la partició perquè treballe amb un sistema d’arxius en particular.
+		Quan una partició està formatada s’anomena un <strong>volum</strong>.
+	</p>
+
+	<p>
+		Podem entendre un volum com un àrea d’emmagatzemament i este àrea pot englobar una única partició o més d’una, que fins i tot, no ha d’estar necessàriament en el mateixa unitat.
+	</p>
+
+	<p>
+		Quan s’instal·la un sistema operatiu podem deixar que l'instal·lador cree automàticament les particions i els volumns que considere o crear-les nosaltres manualment i després instal·lar el sistema operatiu en una d’elles.
+	</p>
+
+	<p>
+		En moltes ocasions els termes de dispositiu, partició i volum se solen confondre i utilitzar-se com a sinònims ja que els volums solen tindre les dimensions d’un disc o d’una partició.
+	</p>
+
+	<h3>Bootloader</h3>
+
+	<p>
+		Quan premem el botó d’encesa d’un ordinador es posa en marxa un programari que realitza dos tasques.
+		La primera és un procés anomenat POST que s’encarrega de comprovar el maquinari que està instal·lat i d’inicialitzar-lo.
+		La segona és el procés de buscar en memòria secundària i de posar en marxa el sistema operatiu.
+	</p>
+
+	<p>
+		Este programari està gravat en un xip (firmware) que ve de fàbrica en la pròpia placa base i pot ser de dos tipus: <strong>BIOS</strong> i <strong>UEFI</strong>.
+	</p>
+
+	<p>
+		La BIOS (Basic Input Output Sytem) és el més antic i està dissenyat per a treballar amb particions MBR.
+	</p>
+	<p>
+		La UEFI (Unified Extensible Firmware Interface) és una evolució més moderna de la BIOS i la que s’utilitza en els ordinadors actuals i està dissenyada per a treballar amb particions GPT, encara que per compatibilitat pot treballar amb particions MBR.
+	</p>
+
+	<p>
+		Quan s’instal·la un sistema operatiu (Windows, Linux, MacOS) en una partició GPT, el procés d’instal·lació crearà una partició especial anomenada <strong>ESP</strong> (EFI System partition) que està formatada en FAT32.
+		Està partició és independent del sistema operatiu i emmagatzema el <string>bootloader</string> o carregador d’arrancada que és el programa que carrega la BIOS a l’arrancar l’ordinador i s’encarrega de començar el procés de càrrega del sistema operatiu.
+	</p>
+
+	<p>
+		En el cas de MBR no existix cap partició especial, tant la taula de particions com el bootloader estan gravats directament en el sector 0 en cas dels discos durs i en pàgina 0/bloc 0 en el cas dels SSD.
+	</p>
+
+
+	<h3>Exemples d'esquemes de particions</h3>
+
+	<h4>Windows</h4>
+	<p>
+		En Windows, als volums se’ls assigna una lletra començant per la C.
+		Es comença per la C perquè les lletres A i B s’utilitzaven per a referir-se a les obsoletes disqueteres.
+	</p>
+
+	<p>
+		La següent figura mostra l’esquema estàndard de particions en Windows 10.
+		La primera partició és la de recuperació que utilitza Windows per a restaurar la configuració de fàbrica del sistema operatiu en casos d’error del sistema operatiu.
+		La partició ESP és la partició especial EFI que permet arrancar el sistema.
+		L’altra partició correspon a la unitat C: on està el sistema operatiu, els programes i les dades de l’usuari.
+		Com es veu està formatada amb NTFS.
+	</p>
+
+	<figure>
+		<img src="imatges/Particions Windows.png" />
+	</figure>
+
+
+	<h4>Linux</h4>
+
+	<p>
+		Quan un dispositiu, com un disc o un ssd, es connecta al sistema, Linux li associa un arxiu especial a través del qual els programes i el propi sistema operatiu es poden comunicar (llegir/escriure) amb ell.
+		Estos arxius s’anomenen <strong>arxius de dispositiu</strong> i estan ubicats en el directori <strong>/dev</strong>.
+	</p>
+
+	<p>
+		El nom d’este arxiu es crea seguint estes regles:
+	</p>
+
+	<ul>
+		<li>
+			En el cas dels discos durs, USB i SSD SATA:<br>
+			El nom del dispositiu és <strong>sd</strong> seguit per una lletra. Esta lletra és la <strong>a</strong> per al primer dispositiu que detecta, <strong>b</strong> per al segon i així successivament.
+			A continuació de la lletra va un nombre que indica el nombre de la partició.<br>
+			Per exemple: /dev/sda1 correspon a la partició 1 del dispositiu a.
+		</li>
+		<li>
+			En el cas de dispositius SSD NVMe:<br>
+			El nom del dispositiu és <strong>nvme</strong> seguit per un nombre que, començant pel <strong>0</strong>, identifica el controlador del dispositiu.
+			Així nvme0 seria el primer controlador NVMe, nvme1 seria el segon, etc. A continuació, va la lletra <strong>n</strong> seguida d’un nombre, començant per l’<strong>1</strong>, que indica el nombre de dispositiu en el controlador.
+			A continuació, va la lletra <strong>p</strong> seguida pel nombre de la partició.<br>
+			Per exemple: /dev/mvme0n1p3 és la partició 3 del dispositiu 1 del controlador 0.
+		</li>
+	</ul>
+
+	<p>
+		En Linux, per a poder accedir a un sistema d’arxius, este s’ha de muntar. Este procés consistix en adjuntar l’arbre de directoris del sistema d’arxius d’un volum a l’arbre de directoris del sistema en un directori determinat anomenat punt de muntatge.
+	</p>
+
+	<p>
+		Per exemple, si la partició /dev/sda5 està muntada en /usr/ significa que tots els arxius i directoris que estan en /dev/sda5 s’accedixen entra dins del directori /usr/
+	</p>
+
+	<p>
+		A continuació, mostrarem un esquema de particions típic de GNU/Linux.
+		Observem que la unitat /dev/sda ha sigut dividida en tres particions sda1, sda2 i sda3.
+		La partició sda1 és la partició especial ESP formatada a FAT32.
+		La partició sda2 conté tot el sistema operatiu, programes i dades de l’usuari.
+		La partició 3 és una partició especial anomenada swap que Linux utilitza quan no hi ha prou memòria RAM per a executar els programes i fa servir esta partició com a memòria virtual, que ve a ser com una extensió de la RAM feta en el disc.
+
+	</p>
+
+	<figure>
+		<img src="imatges/Particions Linux.png" />
+	</figure>
+
+	<h4>Android</h4>
+
+	<p>
+		En la següent figura mostrem les particions estàndard del sistema operatiu Android. Seguixen un esquema GPT.
+	</p>
+
+	<figure>
+		<img src="imatges/Particions Android.png" />
+	</figure>
+
+	<p>
+		La seua funció és:
+	</p>
+
+	<ul>
+		<li>
+			/data<br>
+			Conté totes les dades de l’usuari (aplicacions, jocs, arxius descarregats).
+			Esta partició és la memòria interna del telèfon que pot aprofitar l’usuari.
+			És per això que la memòria interna que veu l’usuari és menor que la indica el fabricant quan ven el mòbil.
+			Quan es restaura el telèfon de fàbrica estem eliminant les dades que hi ha en esta partició.
+		</li>
+		<li>
+			/boot<br>
+			És la partició d’arrancada del sistema on està el bootloader i el kernel Linux.
+		</li>
+		<li>
+			/cache<br>
+			Guarda informació que l’usuari accedix freqüentment amb l’objectiu que la càrrega de dades freqüents siga més ràpida.
+		</li>
+		<li>
+			/system<br>
+			Conté els arxius del sistema operatiu.
+			També inclou la interfície d’usuari d’Android i les aplicacions preinstalades del dispositiu.
+		</li>
+		<li>
+			/recovery<br>
+			S’utilitza per a tasques de manteniment i recuperació de dades.
+			Permet iniciar el sistema en mode de recuperació.
+		</li>
+		<li>
+			/misc<br>
+			Inclou informació de l’operador telefònic, sobre la configuració del sistema i del maquinari, ajustos de regió, etc.
+		</li>
+		<li>
+			/sdcard<br>
+			Equivalent a /data però en la targeta microSD.
+		</li>
+	</ul>
