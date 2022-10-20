@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../estils/reset.css">
+	<link rel="stylesheet" href="../estils/estils.css">
+</head>
+
+<body>
+
+	<h2>Gestió d'usuaris</h2>
+
+	<h3>Usuaris i grups</h3>
+
+	<p>
+		Un sistema operatiu és multiusuari quan dos o més usuaris poden estan utilitzant la mateixa màquina al mateix temps i compatir els mateixos recursos.
+	</p>
+
+	<p>
+		Els sistemes multiusuari permeten crear diferents tipus d’usuaris als quals se’ls atorga diferents privilegis, és a dir la capacitat de fer més o menys accions dins del sistema.
+	</p>
+
+	<p>
+		L’usuari amb més privilegis, anomenat administrador, superusuari o root segons el sistema operatiu, és l’usuari amb major llibertat, pot instal·lar i desinstal·lar programes, entrar en qualsevol directori i arxiu, crear i esborrar usuaris així com assignar o revocar-los privilegis, actualitzar el sistema, formatar discos, etc. En general, configurar qualsevol detall sobre el funcionament del sistema.
+	</p>
+
+	<p>
+		La resta d’usuaris del sistema poden tindre més o menys restriccions segons l’administrador els atorguen o retire privilegis. Per mesures de seguretat un usuari normal no ha de poder instal·lar cap programa, navegar més enllà de les seues carpetes personal ni fer cap tipus de modificació en el sistema.
+	</p>
+
+	<p>
+		També és normal crear grups d’usuaris. La idea és que enlloc d’assignar els privilegis als usuaris de manera individual se’ls assigna a un grup i tot usuari que pertanya a eixe grup heretarà els seus privilegis. Un usuari pot pertànyer a més d’un grup simultàniament.
+	</p>
+
+	<p>
+		Els típics són:
+	</p>
+
+	<ul>
+		<li>
+			Grup administrador, format pels usuaris administradors del sistema.
+		</li>
+		<li>
+			Grups d’usuaris normals. Disposen de les seus carpetes i entorn de treball propi.
+		</li>
+		<li>
+			Grup d’usuari convidats. Pensat per a usuaris que accedeixen al sistema eventualment, poden utilitzar els programes per no tenen carpetes ni entorn de treball propi, quan tanquen sessió s’esborra tot el que han fet.
+		</li>
+	</ul>
+
+	<p>
+		A banda d’estos, cada sistema operatiu té els seur grups d’usuaris propis especials. Per citar alguns exemples:
+	</p>
+	<ul>
+		<li>
+			Operador de xarxa: podem configurar i administrar la xarxa.
+		</li>
+		<li>
+			Usuari remot: poden connectar-se remotament al sistema.
+		</li>
+		<li>
+			Administradors d’impressió: podes instal·lar i configurar impressores.
+		</li>
+	</ul>
+
+
+	<h3>Perfils d'usuari</h3>
+	<p>
+		S’entén com a perfil d’usuari tota aquella informació de configuració per a un usuari concret. Inclou, entre altres, la configuració de l’entorn d’escriptori (fons d’escriptori, menú, accessos directes, etc.) , carpetes de treball, connexió de xarxa i la configuració de les aplicacions. O siga, totes aquelles preferències personals que fan que l’equip tinga l'aspecte i funcionen tal com l’usuari desitja.
+	</p>
+	<p>
+		Hi ha dos tipus de perfil d’usuari: usuari local i mòbil.
+	</p>
+
+	<ul>
+		<li>
+			L’usuari local s’emmagatzema en cada ordinador i personalitza l’entorn de treball d’un usuari en eixe equip. Si un usuari obre una sessió en un altre ordinador haurà de tornar a deixar l’entorn com vol des de zero i haurà de fer una còpia dels arxius amb que treballa si vol gastar-los en un altre equip.
+		</li>
+		<li>
+			El perfil mòbil està pensat per a entorns amb un servidor. Quan un usuari entrar en el seu compte descarrega el seu perfil d’usuari del servidor i quan tanca la sessió l’envia al servidor. El perfil de cada usuari està disponible a l’iniciar sessió des de qualsevol equip connectat al servidor.
+		</li>
+	</ul>
+
+</body>
+
+</html>
