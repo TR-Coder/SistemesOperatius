@@ -18,11 +18,8 @@
 	<h2>Estats d'un procés</h2>
 
 	<p>
-		Que un procés estiga en marxa no implica que estiga necessàriament en execució, dit d’altra manera no implica que participe en el procés de concurrència.
-	</p>
-
-	<p>
-		Els processos passen per diversos estats durant la seua execució. La següent figura és el diagrama d’estats pels quals pot passar un procés. El nom dels estats està emmarcats amb un cercle, les transicions entre els estats amb un arc juntament amb l’acció o esdeveniment que provoca el canvi d’estat.
+		Que un procés estiga en marxa no implica que estiga necessàriament en execució.
+		Els processos passen per diversos estats durant la seua vida. La següent figura mostra el diagrama d’estats pels quals pot passar un procés. El nom dels estats està emmarcat amb un cercle, les transicions entre els estats amb un arc juntament amb l’acció o esdeveniment que provoca este canvi d’estat.
 	</p>
 
 	<figure>
@@ -37,16 +34,16 @@
 	<ul>
 		<li>
 			<strong>Estat de nou</strong><br>
-			En este estat, el sistema operatiu encara no ha carregat el procés en memòria ni l’ha afegit a la llista de processos en execució, però ho té tot preparat per a fer-ho.<br>
-			Normalment, quan un procés es crea s’admet ràpidament i passa a l’estat de llest, però si hi ha molts processos en execució i el sistema està sobrecarregat, el sistema operatiu pot decidir retardar la seua admissió amb l’objectiu de no saturar més el sistema.
+			En este estat, el sistema operatiu encara no ha carregat el procés en memòria ni l’ha afegit a la llista de processos llestos, però ho té tot preparat per a fer-ho.<br>
+			Normalment, quan un procés es crea s’admet ràpidament i passa a l’estat de llest, però si hi ha molts processos en marxa i el sistema està sobrecarregat, el sistema operatiu pot decidir retardar la seua admissió amb l’objectiu de no saturar més el sistema.
 			Tinguem en compte que el processos competixen pels recursos del sistema, principalment RAM i CPU, i que estos són limitats.
 		</li>
 		<li>
-			La transició <strong>de llest a admés</strong> es produïx quan el sistema operatiu calcula que hi ha prou recursos perquè el procés s’execute.
+			La transició <strong>de nou a llest</strong> es produïx quan el sistema operatiu calcula que hi ha prou recursos perquè el procés s’execute.
 		</li>
 		<li>
 			<strong>Estat de llest</strong><br>
-			El procés és afegit a la llista de processos en execució i esta esperant el seu torn per a ser assignat al processador per a la seua execució. En una CPU clàssica (amb un sol nucli) en cada moment només hi ha un procés en execució. La resta de processos estan en estat llest fins que se'ls concedeix el torn de CPU, moment en què passen a l’estat d’execució.
+			El procés és afegit a la llista de processos llestos on esperarà el seu torn per avançar en la seua execució. En una CPU clàssica (amb un sol nucli) en cada moment només hi ha un procés en execució. La resta de processos romanen en estat llest fins que se'ls concedeix el torn de CPU, moment en què passen a l’estat d’execució.
 		</li>
 		<li>
 			La transició <strong>de llest a execució</strong> ocorre quan en el canvi de context es decidix que el procés passarà a executar-se.

@@ -5,13 +5,13 @@ body {
 	margin: 0 .5rem
 }
 
-body,
+/* body,
 html {
 	height: 100%;
 	background-repeat: no-repeat;
 	background: url(../emoticona.png) no-repeat center center fixed;
 	background-size: 90% 50%;
-}
+} */
 
 .botonimagen {
 	background-image: url(../emoticona.png);
