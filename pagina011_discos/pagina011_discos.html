@@ -26,7 +26,7 @@
 	<h4>Estructura física</h4>
 	<p>
 		Un disc està físicament format per un o més plats units per un mateix eix que els fa girar gràcies a un motor a una velocitat constant que sol ser de 7.200 rpm (revolucions per minut).
-		Els discos sempre està girant mestre l’ordinador està en marxa.
+		Els discos sempre està girant mentre l’ordinador està en marxa.
 	</p>
 	<p>
 		Cada plat té dos cares, una inferior i una superior, sobre les quals està depositat un material magnetitzable. Per a situar-se sobre la zona on llegir/escriure la informació disposa d’uns braços (un per cara) sobre els quals estan uns capçals de lectura/escriptura. Per simplicitat, els braços se solen moure tots al mateix temps.
@@ -41,7 +41,8 @@
 		L’operació d’escriptura és similar a l’anterior.
 	</p>
 	<p>
-		Els capçals de lectura/escriptura no toquen mai el disc sinó que floten molt a prop de la seua superfície. Una mínima quantitat de pols o una forta vibració pot fer que el capçal toque la superfície i danye els disc i les dades que conté, d’ací que tot el conjunt estiga protegit dins d’una caixa.
+		Els capçals de lectura/escriptura no toquen mai el disc sinó que floten molt a prop de la seua superfície.
+		Una mínima quantitat de pols o una forta vibració pot fer que el capçal toque la superfície i danye els disc i les dades que conté, per això tot el conjunt està protegit dins d’una carcassa hermèticament tancada.
 	</p>
 
 	<p>
@@ -55,8 +56,13 @@
 	<h4>Estructura lògica</h4>
 
 	<p>
-		La informació sobre el disc seguix un estructura que queda definida per una pista, un cilindre i un sector.
+		La informació sobre el disc seguix un estructura que queda definida per <i>pistes</i>, <i>cilindres</i> i <i>sectors</i>.
 	</p>
+
+	<figure>
+		<img src="imatges/Pista, sector i cluster.jpg" />
+	</figure>
+
 	<p>
 		Cadascuna de les cares d’un disc es dividix en anells concèntrics anomenats pistes. Com els braços es mouen junts, quan es situen formen una pila de pistes que s’anomena cilindre.
 	</p>
@@ -65,7 +71,7 @@
 	</p>
 
 	<p>
-		Els sectors estan situats de manera contigua format les pistes. Els sectors venen gravats de fàbrica i és la zona en què es graven els bits d’informació. Ara bé, no tot l’espai que ocupa un sector es dedica a informació útil dels arxius, hi ha també informació addicional que ajuda a la controladora dels disc ha col·locar els capçals i identificar cada sector.
+		Els sectors estan situats de manera contigua formant les pistes. Els sectors venen gravats de fàbrica i és la zona en què es graven els bits d’informació. Ara bé, no tot l’espai que ocupa un sector es dedica a informació útil dels arxius, hi ha també informació addicional que ajuda a la controladora dels disc ha col·locar els capçals i identificar cada sector.
 	</p>
 	<p>
 		Si es poguera vore una pista tindria un estructura com:

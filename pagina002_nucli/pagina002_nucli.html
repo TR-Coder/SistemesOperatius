@@ -14,32 +14,57 @@
 </head>
 
 <body>
-	<h2>Procés d'arrancada. El nucli (kernel)</h2>
+	<h2>Procés d'arrancada</h2>
+	<h3>POST i bootloader</h3>
 	<p>
-		Quan s’arranca un ordinador es posa en marxa un programa que s’encarrega del procés d’encesa de l’ordinador.
-		Este programa està gravat en un xip de la placa base conegut com a CMOS BIOS.
+		El procés d’arrancada d’un ordinador té bàsicament estes fases:
 	</p>
-
-	<p>
-		El procés d’arrancada d’un ordinador té bàsicament dos fases:
-	</p>
-
 	<ul>
 		<li>
-			<i>POST</i><br>
-			La primera fase s’anomena POST (Power-On-Self-Test) i consistix en inicialitzar i comprovar el correcte funcionament del maquinari (processador, placa base, RAM, busos del sistema, discos i SSD i les targetes d’expansió)
+			<strong>Font d'alimentació</strong><br>
+			Al polsar el botó d’encesa, la placa base envia un senyal a la font d’alimentació per iniciar la seua activació, acabada la qual tots els components, entre ells el processador, reben els voltatges que necessiten per a funcionar.
 		</li>
 		<li>
-			<i>Càrrega del sistema operatiu</i><br>
-			La segona fase és la de buscar i carregar el sistema operatiu.
-			Una vegada carregat deixa d’executar-se el programa d’arrancada i comença la seua execució.
-			Normalment, el sistema operatiu està en disc (disc dur o SSD) però es possible arrancar-lo des d’un USB, un DVD o des de xarxa.
+			<strong>POST</strong><br>
+			Quan el processador s’inicia comença a executar un programa gravat en la BIOS anomenat POST (Power On Self Test). 
+			És tracta d’un firmware, independent del sistema operatiu, que verifica quin és el maquinari instal·lat i connectat a la placa base i el seu correcte funcionament.	Este procés comprova:
+			<ul>
+				<li>Hi ha un teclat connectat.</li>
+				<li>Hi ha RAM i està ben connectada.</li>
+				<li>La gràfica funciona (integrada o en targeta gràfica)</li>
+				<li>Les unitats SSD i els discos connectats funcionen.</li>
+				<li>Les targetes d’expansió. Alguns components, com les targetes gràfiques, les de xarxa, els controladores raid, etc., tenen una BIOS pròpia que fan un autodiagnòstic a banda del general del sistema.
+					El POST identifica i verifica aquells components que tenen la seua pròpia bios i espera a què estos li confirmen que funcionen correctament.</li>
+			</ul>
+			Si durant el POST hi ha algun problema, les plaques base poden emetre uns xiulits d’avís o mostrar algun missatge per pantalla.
+			Si el problema es greu (no es troba el disc d’arrancada, memòria mal connectada, etc) el procés d’arrancada es deté i el sistema no arrancarà.
+		</li>
+		<li>
+			<strong><i>Càrrega del sistema operatiu</strong><br>
+			<p>	Després del POST s’inicia la interfície gràfica de la BIOS i és quan veiem el logo del fabricant per pantalla i quan podrem entrar en la utilitat de configuració de la BIOS (o BIOS setup).
+			Per accedir a la configuració hem de polsar una determinada tecla, la qual depén del fabricant de la BIOS i que sol ser supr, F2, F10 o alguna altra.</p>
+			<p>La BIOS busca i executa el gestor d’arrancada. Es tracta d’un programa (un arxiu conegut com a bootloader) que busca i carrega en memòria el kernel del sistema operatiu.
+			El gestor d’arrancada en sistemes Linux s’anomena GRUB i en Windows BOOTMGR. Els bootloaders també mostren per pantalla un menú que, en el cas de tindre instal·lat més d’un sistema operatiu,
+			permeten tria quin és el sistema operatiu a carregar-se. A més, mostren opcions com mode de recuperació i altres opcions d’arrancada més avançades.</p>
+			<p>Normalment, el sistema operatiu està en disc (disc dur o SSD) però es possible arrancar-lo des d’un USB, un DVD o des de xarxa.</p>
 		</li>
 	</ul>
 
+	<figure>
+		<img src="imatges/opcions BIOS.png" />
+	</figure>
+
+	<h3>UEFI vs BIOS</h3>
 	<p>
-		De tots el processos que formen un sistema operatiu n’hi ha un que és el més important i que sempre està carregat en la RAM i en execució.
-		És l’anomenat nucli, o kernel.
-		Este s’encarrega de la gestió de la memòria, de la planificació i comunicació entre processos, i del control general del sistema.
+		Encara que en l’apartat anterior hem fet referència diverses vegades a la BIOS, en realitat ja fa anys que la BIOS ha sigut reemplaçada per un altre firmware més modern anomenat UEFI (Unified Extensible Firmware Interface).
+		A pesar del canvi, no es estrany vore que se seguix utilitzant el terme BIOS enlloc de UEFI.
+		Tant el firmware de la BIOS com el de la UEFI fan funcions similares, però el de la UEFI oferix avantatges com millores en la velocitat del procés d’arrancada,
+		és més segur i disposa d'una aplicació de configuració més moderna amb un entorn gràfic que suporta el ratolí. 
+	</p>
+
+	<h3> El nucli (kernel)</h3>
+	<p>
+		De tots el processos que formen un sistema operatiu n’hi ha un que és el més important, i que sempre està carregat en la RAM i en execució fins que s'apaga el sistema.
+		És l’anomenat nucli, o kernel. Este s’encarrega de la gestió de la memòria, de la planificació i comunicació entre processos, i del control general del sistema.
 	</p>
 </body>
